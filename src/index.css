@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Creepster&family=Nosifer&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --horror-font: 'Nosifer', cursive;
+  --pixel-font: 'Press Start 2P', cursive;
+  --text-font: 'VT323', monospace;
+  --creepy-font: 'Creepster', cursive;
+}
+
+* {
+  cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 2L2 30L16 24L30 30L16 2Z' fill='%23ff0000' fill-opacity='0.8'/%3E%3C/svg%3E") 16 16, auto !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body {
+  background-color: black;
+  color: #fff;
+  font-family: var(--text-font);
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  overflow-x: hidden;
+}
+
+/* Horror Headings */
+.horror-heading-main {
+  font-family: var(--horror-font);
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.7),
+               0 0 20px rgba(255, 0, 0, 0.5),
+               0 0 30px rgba(255, 0, 0, 0.3);
+  animation: pulseText 3s infinite;
+}
+
+.horror-heading-secondary {
+  font-family: var(--pixel-font);
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6),
+               0 0 16px rgba(255, 0, 0, 0.4);
+  animation: glitch 3s infinite;
+}
+
+.horror-heading-tertiary {
+  font-family: var(--creepy-font);
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px rgba(255, 0, 0, 0.5);
+}
+
+/* TV Effect */
+.tv-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.tv-effect::before,
+.tv-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tv-effect::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  animation: scanline 10s linear infinite;
+}
+
+.tv-effect::after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 3px 100%;
+  animation: colorshift 5s linear infinite;
+}
+
+/* Horror Card */
+.horror-card {
+  @apply relative bg-black/80 p-6 rounded-lg border border-red-900/50 transition-all duration-300;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.1);
+  animation: flicker 0.15s infinite;
+}
+
+.horror-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 65%,
+    rgba(255, 0, 0, 0.1) 75%,
+    rgba(255, 0, 0, 0.3) 80%,
+    transparent 100%
+  );
+  animation: scanEffect 3s linear infinite;
+  z-index: 0;
+  border-radius: 0.5rem;
+}
+
+.horror-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.horror-card:hover {
+  @apply border-red-600;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.2);
+}
+
+/* Horror Button */
+.horror-button {
+  @apply relative overflow-hidden;
+  font-family: var(--pixel-font);
+  background: linear-gradient(45deg, #630000, #830000);
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: buttonPulse 2s infinite;
+}
+
+.horror-button:hover {
+  background: linear-gradient(45deg, #830000, #a30000);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Tab Styles */
+.tab-horror {
+  @apply relative px-3 py-1.5;
+  font-family: var(--pixel-font);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.tab-horror::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ff0000, transparent);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.tab-horror:hover::before,
+.tab-horror.active::before {
+  width: 100%;
+}
+
+.tab-horror:hover {
+  color: #ff0000;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.tab-horror.active {
+  color: #ff0000;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Hover Horror Effect */
+.hover-horror {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hover-horror::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #ff0000;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.hover-horror:hover::after {
+  width: 100%;
+}
+
+.hover-horror:hover {
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes colorshift {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes scanEffect {
+  0% { transform: translateX(-100%) skewX(45deg); }
+  100% { transform: translateX(200%) skewX(45deg); }
+}
+
+@keyframes buttonPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+@keyframes pulseText {
+  0% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.7),
+                    0 0 20px rgba(255, 0, 0, 0.5),
+                    0 0 30px rgba(255, 0, 0, 0.3); }
+  50% { text-shadow: 0 0 15px rgba(255, 0, 0, 0.9),
+                     0 0 25px rgba(255, 0, 0, 0.7),
+                     0 0 35px rgba(255, 0, 0, 0.5); }
+  100% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.7),
+                      0 0 20px rgba(255, 0, 0, 0.5),
+                      0 0 30px rgba(255, 0, 0, 0.3); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dc2626;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+/* Text Effects */
+.pixel-text {
+  font-family: var(--pixel-font);
+  text-shadow: 2px 2px #ff0000;
+}
+
+.horror-text {
+  font-family: var(--text-font);
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
